@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="mySQL," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="MySQL学习笔记一、基本操作 启动服务 net start mysql 登录 mysql -u username -p password 展示所有数据库 SHOW DATABASES; 展示创建的某个数据库的所有信息 SHOW CREATE DATABASE name; 创建数据库并设置字符集 CREATE DATABASE name [CHARACTER SET utf8]; 修改数据库 AL">
+<meta name="keywords" content="mySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL学习笔记">
+<meta property="og:url" content="https://dskin.github.io/2017/09/08/MySQL学习笔记/index.html">
+<meta property="og:site_name" content="dskin">
+<meta property="og:description" content="MySQL学习笔记一、基本操作 启动服务 net start mysql 登录 mysql -u username -p password 展示所有数据库 SHOW DATABASES; 展示创建的某个数据库的所有信息 SHOW CREATE DATABASE name; 创建数据库并设置字符集 CREATE DATABASE name [CHARACTER SET utf8]; 修改数据库 AL">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2017-11-01T15:26:05.451Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL学习笔记">
+<meta name="twitter:description" content="MySQL学习笔记一、基本操作 启动服务 net start mysql 登录 mysql -u username -p password 展示所有数据库 SHOW DATABASES; 展示创建的某个数据库的所有信息 SHOW CREATE DATABASE name; 创建数据库并设置字符集 CREATE DATABASE name [CHARACTER SET utf8]; 修改数据库 AL">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dskin.github.io/2017/09/08/MySQL学习笔记/"/>
+
+
+
+
+
+  <title>MySQL学习笔记 | dskin</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dskin</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">简单的个人博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            Schedule
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dskin.github.io/2017/09/08/MySQL学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dskin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dskin">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MySQL学习笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-08T17:11:00+08:00">
+                2017-09-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="MySQL学习笔记"><a href="#MySQL学习笔记" class="headerlink" title="MySQL学习笔记"></a>MySQL学习笔记</h1><h2 id="一、基本操作"><a href="#一、基本操作" class="headerlink" title="一、基本操作"></a>一、基本操作</h2><ul>
+<li>启动服务 <code>net start mysql</code></li>
+<li>登录 <code>mysql -u username -p password</code></li>
+<li>展示所有数据库 <code>SHOW DATABASES;</code></li>
+<li>展示创建的某个数据库的所有信息 <code>SHOW CREATE DATABASE name;</code></li>
+<li>创建数据库并设置字符集 <code>CREATE DATABASE name [CHARACTER SET utf8];</code></li>
+<li>修改数据库 <code>ALTER DATABASE;</code></li>
+<li>展示错误信息 <code>SHOW WARNINGS;</code></li>
+<li>删除数据库 <code>DROP DATABASE name;</code> </li>
+</ul>
+<h2 id="二、数据类型"><a href="#二、数据类型" class="headerlink" title="二、数据类型"></a>二、数据类型</h2><p>1、整型</p>
+<ul>
+<li>TINYINT0 1</li>
+<li>SMALLINT 2</li>
+<li>MEDIUMINT 3</li>
+<li>INT 4</li>
+<li>BIGINT 8<br>2、浮点型</li>
+<li>FLOAT(M,D)</li>
+<li>DOUBLE(M,D)<br>3、日期时间型</li>
+<li>YEAR</li>
+<li>TIME</li>
+<li>DATA</li>
+<li>DATATIME</li>
+<li>TIMESTAMP<br>4、字符型</li>
+<li>CHAR(M)</li>
+<li>VARCHAR(M)</li>
+<li>TINYTEXT</li>
+<li>TEXT</li>
+<li>MEDIUMTEXT</li>
+<li>LONGTEXT</li>
+<li>ENUM(VALUE1,VALUE2…)</li>
+<li>SET(VALUE1,VALUE2…)</li>
+</ul>
+<h2 id="三、基本数据表操作"><a href="#三、基本数据表操作" class="headerlink" title="三、基本数据表操作"></a>三、基本数据表操作</h2><ul>
+<li>打开数据库 <code>USE name;</code></li>
+<li>创建数据表 <code>CREATE TABLE table_name(column_name data_type,...,...);</code></li>
+<li>查看数据表列表 <code>SHOW TABLES [FROM db_name];</code></li>
+<li>查看数据表结构 <code>SHOW COLUMNS FROM tbl_name;</code></li>
+<li>记录的插入 <code>INSERT tbl_name[col_name,col_name,...] VALUES(value,...);</code></li>
+<li>记录的查找 <code>SELECT expr,... FROM tbl_name;</code></li>
+<li>非空约束 <code>NULL,NOT NULL</code></li>
+<li><code>AUTO_INCREMENT</code> 自动编号，且必须和主键一起使用</li>
+<li><code>PRIMARY KEY</code> 主键约束，保证记录的唯一性，每张数据表只能存在一个主键，主键自动为<code>NOT NULL</code></li>
+<li><code>UNIQUE KEY</code> 唯一约束，保证记录的唯一性，可存在多个唯一约束；字段可为空</li>
+<li><code>DEFAULT</code> 设置字段默认值</li>
+</ul>
+<h2 id="四、约束"><a href="#四、约束" class="headerlink" title="四、约束"></a>四、约束</h2><ul>
+<li><code>FOREIGN KEY...REFERENCES...</code> 外键约束，保持数据一致性、完整性；实现一对一或一对多的关系</li>
+<li>外键约束的一些要求：<ul>
+<li>父表和子表必须使用相同的存储引擎，禁止临时表</li>
+<li>存储引擎必须为InnoDB</li>
+<li>外键列和参照列必须具有相同的数据类型。其中数字的长度和符号位必须相同，而字符长度可以不同</li>
+<li>外键列和参照列必须创建索引。若外键列不存在索引，MySQL会自动创建</li>
+</ul>
+</li>
+<li>外键约束的参考操作：<ul>
+<li>CASCADE</li>
+<li>SET NULL</li>
+<li>RESTRICT</li>
+<li>NO ACTION</li>
+</ul>
+</li>
+<li><code>DELETE FROM tbl_name WHERE 条件</code> 删除记录</li>
+</ul>
+<h2 id="五、修改数据表"><a href="#五、修改数据表" class="headerlink" title="五、修改数据表"></a>五、修改数据表</h2><ul>
+<li>添加单列 <code>ALTER TABLE tbl_name ADD [COLUMN] col_name column_definition [FIRST|AFTER col_name]</code></li>
+<li>添加多列 <code>ALTER TABLE tbl_name ADD [COLUMN] (col_name column_definition,...)</code> </li>
+<li>删除列 <code>ALTER TABLE tbl_name DROP [COLUMN] col_name</code> </li>
+<li>添加主键约束 <code>ALTER TABLE tbl_name ADD [CONSTRAINT [SYMBOL]] PRIMARY KEY [INDEX_TYPE] (index_col_name)</code> </li>
+<li>添加唯一约束 <code>ALTER TABLE tbl_name ADD [CONSTRAINT [SYMBOL]] UNIQUE [INDEX|KEY] [INDEX_NAME] [INDEX_TYPE] (index_col_name,...)</code> </li>
+<li>添加外键约束 <code>ALTER TABLE tbl_name ADD [CONSTRAINT [SYMBOL]] FOREIGN KEY [INDEX_NAME] (index_col_name,...) reference_definition</code> </li>
+<li>添加\删除默认约束 <code>ALTER TABLE tbl_name ALTER [COLUMN] col_name {SET DEFAULT literal|DROP DEFAULT}</code> </li>
+<li>删除主键约束 <code>ALTER TABLE tbl_name DROP PRIMARY KEY</code> </li>
+<li>删除唯一约束 <code>ALTER TABLE tbl_name DROP {INDEX|KEY} index_name</code> </li>
+<li>删除外键约束 <code>ALTER TABLE tbl_name DROP FOREIGN KEY fk_symbol</code> </li>
+<li>修改列定义 <code>ALTER TABLE tbl_name MODIFY [COLUMN] col_name col_defination [FRIST|AFTER col_name]</code></li>
+<li>修改列名称 <code>ALTER TABLE tbl_name CHANGE [COLUMN] old_col_name new_col_name column_definition [FIRST|AFTER col_name]</code></li>
+<li>数据表更名<ul>
+<li><code>ALTER TABLE tbl_name RENAME [TO|AS] new_tbl_name</code></li>
+<li><code>RENAME TABLE old_tbl_name TO new_tbl_name [,old_tbl_name2 TO new_tbl_name2]</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="六、修改记录"><a href="#六、修改记录" class="headerlink" title="六、修改记录"></a>六、修改记录</h2><ul>
+<li>插入记录<ul>
+<li><code>INSERT tbl_name [(col_name)] {VALUES|VALUE} ({expr|DEFAULT},...),(...),...</code></li>
+<li><code>INSERT tbl_name SET col_name={expr|DEFAULT},...</code>可以使用子查询</li>
+<li><code>INSERT tbl_name [(col_name),...] SELECT ...</code>将查询结果直接插入到指定数据表</li>
+</ul>
+</li>
+<li>更新记录<ul>
+<li>单表更新 <code>UPDATE [LOW_PRIORITY] [IGNORE] table_reference SET col_name1={expr1|DEFAULT} [,col_name2={expr2|DEFAULT}]...[WHERE where_condition]</code></li>
+<li>多表更新 <code>UPDATE table_reference SET col_name1={expr1|DEFAULT} [,col_name2={expr2|DEFAULT}]...[WHERE where_condition]</code><ul>
+<li>连接的语法结构 <code>table_reference {[INNER|CROSS] JOIN | {LEFT|RUGHT} [OUTER] JOIN} table_reference ON condition_expr</code></li>
+<li>一步到位的多表更新 <code>CREATE...SELECT</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>删除记录<ul>
+<li>单表删除 <code>DELETE FROM tbl_name [WHERE where_condition]</code></li>
+<li>多表删除</li>
+</ul>
+</li>
+<li>条件查询 <code>WHERE</code></li>
+<li>查询结果分组 <code>GROUP BY {col_name|position} [ASC|DESC]</code></li>
+<li>分组条件 <code>HAVING where_condition</code></li>
+<li>查询结果排序 <code>ORDER BY {col_name|expr|position} [ASC|DESV],...</code></li>
+<li>限制结果返回的数量 <code>LIMIT</code></li>
+</ul>
+<h2 id="七、子查询"><a href="#七、子查询" class="headerlink" title="七、子查询"></a>七、子查询</h2><ul>
+<li>子查询是指在另一个查询语句中的SELECT子句</li>
+<li>使用比较运算符的子查询<ul>
+<li>用ANY、SOME、ALL修饰的比较运算符</li>
+</ul>
+</li>
+<li>使用[NOT]IN的子查询<ul>
+<li>=ANY与IN等效</li>
+<li>!=ALL或&lt;&gt;ALL与NOT IN等效</li>
+</ul>
+</li>
+<li>使用[NOT]EXISTS的子查询</li>
+</ul>
+<h2 id="八、连接"><a href="#八、连接" class="headerlink" title="八、连接"></a>八、连接</h2><ul>
+<li>MySQL在SELECT语句、多表更新、多表删除语句中支持JOIN操作</li>
+<li>语法结构 <code>table_reference {[INNER|CROSS] JOIN | {LEFT|RUGHT} [OUTER] JOIN} table_reference ON condition_expr</code></li>
+<li>连接类型<ul>
+<li>INENR JOIN 内连接,仅显示左表及右表符合连接条件的记录</li>
+<li>LEFT [OUTER] JOIN 左外连接，显示左表的全部记录及右表符合连接条件的记录</li>
+<li>RIGHT [OUTER] JOIN 右外连接，</li>
+</ul>
+</li>
+<li>连接条件<ul>
+<li>ON</li>
+<li>WHERE</li>
+</ul>
+</li>
+<li>多表连接（等值连接）</li>
+<li>无限极分类表设计<ul>
+<li>自身连接 同一个数据表对其自身进行连接</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mySQL/" rel="tag"># mySQL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/02/Linux常用命令整理笔记/" rel="prev" title="Linux常用命令整理笔记">
+                Linux常用命令整理笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">dskin</p>
+              <p class="site-description motion-element" itemprop="description">一个博客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">Tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/dskin" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:huasqjc@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL学习笔记"><span class="nav-number">1.</span> <span class="nav-text">MySQL学习笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、基本操作"><span class="nav-number">1.1.</span> <span class="nav-text">一、基本操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、数据类型"><span class="nav-number">1.2.</span> <span class="nav-text">二、数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、基本数据表操作"><span class="nav-number">1.3.</span> <span class="nav-text">三、基本数据表操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、约束"><span class="nav-number">1.4.</span> <span class="nav-text">四、约束</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、修改数据表"><span class="nav-number">1.5.</span> <span class="nav-text">五、修改数据表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、修改记录"><span class="nav-number">1.6.</span> <span class="nav-text">六、修改记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、子查询"><span class="nav-number">1.7.</span> <span class="nav-text">七、子查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、连接"><span class="nav-number">1.8.</span> <span class="nav-text">八、连接</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">dskin</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
