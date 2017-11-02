@@ -2895,7 +2895,6 @@ hr {
 }
 .footer-inner {
   margin: 0 auto;
-  text-align: left;
 }
 @media (max-width: 767px) {
   .footer-inner {
