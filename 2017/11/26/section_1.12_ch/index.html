@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="-译文," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="活跃的科学领域就像一个巨大的蚂蚁窝；人们消失在互相对立的观点中，以光速传递着信息，将信息从一个地方传到另一个地方。       —————Lewis Thomas，《Lives of a Cell》中的“自然科学”  第一台电子计算机宾夕法尼亚大学穆尔学院的J. Presper Eckert和John Mauchly建造了最被广泛认可的世界第一台可操作的、电子的、通用目的计算机，它叫做ENIAC">
+<meta name="keywords" content="-译文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="译文——第一台电子计算机和其商业化发展(1.12)">
+<meta property="og:url" content="https://dskin.github.io/2017/11/26/section_1.12_ch/index.html">
+<meta property="og:site_name" content="dskin">
+<meta property="og:description" content="活跃的科学领域就像一个巨大的蚂蚁窝；人们消失在互相对立的观点中，以光速传递着信息，将信息从一个地方传到另一个地方。       —————Lewis Thomas，《Lives of a Cell》中的“自然科学”  第一台电子计算机宾夕法尼亚大学穆尔学院的J. Presper Eckert和John Mauchly建造了最被广泛认可的世界第一台可操作的、电子的、通用目的计算机，它叫做ENIAC">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://dskin.github.io/2017/11/26/section_1.12_ch/ENIAC-min.png">
+<meta property="og:image" content="https://dskin.github.io/2017/11/26/section_1.12_ch/UNIVAC-min.jpg">
+<meta property="og:image" content="https://dskin.github.io/2017/11/26/section_1.12_ch/System360-min.jpg">
+<meta property="og:image" content="https://dskin.github.io/2017/11/26/section_1.12_ch/Cray-1-min.jpg">
+<meta property="og:image" content="https://dskin.github.io/2017/11/26/section_1.12_ch/AppleIIePlus-min.jpg">
+<meta property="og:updated_time" content="2017-11-26T09:29:35.816Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="译文——第一台电子计算机和其商业化发展(1.12)">
+<meta name="twitter:description" content="活跃的科学领域就像一个巨大的蚂蚁窝；人们消失在互相对立的观点中，以光速传递着信息，将信息从一个地方传到另一个地方。       —————Lewis Thomas，《Lives of a Cell》中的“自然科学”  第一台电子计算机宾夕法尼亚大学穆尔学院的J. Presper Eckert和John Mauchly建造了最被广泛认可的世界第一台可操作的、电子的、通用目的计算机，它叫做ENIAC">
+<meta name="twitter:image" content="https://dskin.github.io/2017/11/26/section_1.12_ch/ENIAC-min.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dskin.github.io/2017/11/26/section_1.12_ch/"/>
+
+
+
+
+
+  <title>译文——第一台电子计算机和其商业化发展(1.12) | dskin</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b9584e1df80c955aa972713d735bb3c0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dskin</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">简单的个人博客</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dskin.github.io/2017/11/26/section_1.12_ch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dskin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dskin">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">译文——第一台电子计算机和其商业化发展(1.12)</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-26T16:47:20+08:00">
+                2017-11-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>活跃的科学领域就像一个巨大的蚂蚁窝；人们消失在互相对立的观点中，以光速传递着信息，将信息从一个地方传到另一个地方。       —————Lewis Thomas，《Lives of a Cell》中的“自然科学”</p>
+</blockquote>
+<h1 id="第一台电子计算机"><a href="#第一台电子计算机" class="headerlink" title="第一台电子计算机"></a>第一台电子计算机</h1><p>宾夕法尼亚大学穆尔学院的J. Presper Eckert和John Mauchly建造了最被广泛认可的世界第一台可操作的、电子的、通用目的计算机，它叫做<strong>ENIAC</strong>（Electronic<br>Numerical Integrator and Calculator 电子数值积分和计算机）。ENIAC是被美国陆军部资助的项目，在第二次世界大战中开始运作，但直到1946年才公开揭露。<br><a id="more"></a><br>ENIAC是一台通用目的的计算机，它被用来计算火炮发射表。图1.12.1展示了型如U字的计算机，它长80英尺，高8.5英尺，宽数英尺。20个10位寄存器每一个都长2英尺。ENIAC总共使用了18000个真空管。</p>
+<div style="text-align:center"><img style="width:400px;height:300px" src=".\ENIAC-min.png"><p>图1.12.1 ENIAC,世界第一台通用目的电子计算机</p></div>
+
+<p>在尺寸上,ENIAC比现在建造的计算机大两个数量级,然而却比现在的计算机慢八个数量级,它每秒只能执行1900次加法运算。ENIAC提供了条件跳转指令并且它是可编程的，很清晰的将它和早期的计算器区分开来。ENIAC通过手动插上电缆、设置开关来进行编程，数据则通过打孔卡进行输入，一般的计算通常需要编程半小时到一天不等。ENIAC是一台通用目的的计算机，它主要是被储存过小和繁琐的编程步骤所制约。</p>
+<p>在1944年，John von Neumann（冯.诺依曼）被吸引进了ENIAC项目。项目组想要改善程序的输入方式并且讨论了将程序存储为数字的方案；John von Neumann帮助理清了思路并撰写了一份便笺，提出了一个叫做EDVAC（Electronic Discrete<br>Variable Automatic Computer 离散变量自动电子计算机）的以<strong>存储程序</strong>方式工作的计算机。Herman Goldstine整理并提交了这份便笺，只以John von Neumann一人署名，这对同样参与工作的Eckert和Mauchly来说，这实在不太好受，他们的名字直接被忽略了。这份便笺已经成为了通用术语<em>冯·诺伊曼计算机</em>的基础，一些在计算机领域早期的开拓者们认为这个术语给了von Neumann一个人太多荣耀，他只是提出了想法，而对将这份想法实现的工程师Eckert和Mauchly来说，我们给的太少了。因此，这个术语将不会在本书之后的任何地方或者是网络章节部分出现。</p>
+<p>在1946年,剑桥大学的Maurice Wilkes访问了穆尔学院，参加了电子计算机发展系列讲座的后半部分。当Wilkes回到剑桥之后，他也决定着手建设一个命名为EDSAC（Electronic Delay Storage Automatic<br>Calculator 延迟存储电子自动计算器）的存储程序计算机的项目。EDSAC在1949年开始运行，它是世界第一台完成的、可操作的、存储程序的计算机[Wilkes, 1985]。（在1948，曼切斯特大学里建造的一台小型原型机Mark-I号，或许可被称为第一台可操作的存储程序的机器）。在第二章的2.5节会解释存储程序这个概念。</p>
+<p>在1947年，Eckert和Mauchly申请了电子计算机的专利。穆尔学院的院长要求专利要被移交给宾夕法尼亚大学，Eckert和Mauchly因此决定离开学校。他们的辞职也促使EDVAC项目推迟到1952年才完成。</p>
+<p>Goldstine在1946年离职并加入了von Neumann所在的普林斯顿高等研究院，他们和Arthur Burks一起发表了一份基于早些年那份便笺的报告[Burks et al., 1946]。这篇报告具有划时代的意义；即使在今天读来，你都不会相信这篇里程碑式的报告是在五十多年前完成的，因为它讨论了大量现代计算机的架构理念。这篇报告也催生了由Julian<br>Bigelow主持构建的IAS计算机，这台计算机有总共1024个40位字，大约比ENIAC快10倍。研发组想了许多计算机的用途，出版了一系列的报告并鼓励交流学习。这一系列举措激发了一系列新型计算机的研发。</p>
+<p>最近，对于John Atanasoff的功绩，出现了一些争论。John Atanasoff在20世纪四十年代早期就建造了一台小型电子计算机。他的机器在爱荷华州立大学设计制造完成，是一台特定目的的不完全可操作的计算机。Mauchly在建造ENIAC前曾经短暂的拜访过他。Atanasoff机器的存在，以及延迟提交的ENIAC专利（在战争时期，这项工作是保密的，只能在战争后才能申请专利）和von Neumann关于EDVAC报告的发表，一起被用来打破Eckert和Mauchly的电子计算机专利。尽管关于Atanasoff这个人物仍然存在着争议，但是Eckert和Mauchly已经通常被认可并获得了第一个建造可用的，通用目的的电子计算机的荣誉。(PS：这场专利之争持续了六年，美国历史上最长的专利案啊，虽然阿塔纳索夫被法庭判定为“真正的电子计算机之父”，但莫奇利和埃克特还是被后人认为是计算机之父)</p>
+<p>另一台被值得纪念的机器是由Konrad Zuse在1930年晚期到1940年早期于德国建造的专用目的计算机。尽管Zuse已经早就设计了一个可编程的计算机，但是德国政府决定只资助他不超过两年的研究资金，因为这些官僚认为在两年内就会赢得战争。</p>
+<p>而在英吉利海峡的对岸，二战期间，专用目的计算机的建造被用来解密从德国截获来的情报。一个包括Alan Turning（艾伦.图灵）在内的团队在1943年于布莱切利公园建造了这台叫做Colossus的机器（不禁想起了模仿游戏）。这台计算机的秘密直到1970年才被公布出来；二战后，这个团队的研发者也对英国计算机的商业化进程鲜有影响。</p>
+<p>当ENIAC项目正在如火如荼的继续进行的时候，Howard Aiken在哈佛大学建造了一台叫做马克一号的机电计算机（曼切斯特大学也给他的一台机器取名为马克一号，二者不同）。他之后根据马克一号采用中继器建造了马克二号，又用一对真空管完成了马克三号以及马克四号的建造。为了与早期像EDSAC之类的机器相区别，EDSAC采用了指令和数据在同一个单一存储器，马克三号和马克四号对于指令和数据拥有不同的存储器。马克系列机器因此被存储程序计算机的倡导者认为是异端反动份子；哈佛架构（Harvard architecture）这个术语被用来描述具有不同存储器的机器。为了尊重历史，这个术语今天在不同的意义上被用来描述具有单个主存储器但具有用于指令和数据的不同单独缓存器的机器。</p>
+<p>旋风项目（Whirlwind project）于1947年在麻省理工学院启动，旨在应用于实时雷达信号处理。尽管它产生了一系列的发明成果，但其中最重要的发明还是磁芯存储器（magnetic core memory）。“旋风”有2048个16位字的磁芯。而磁芯则是近30年来的主要存储技术。</p>
+<h1 id="商业化发展"><a href="#商业化发展" class="headerlink" title="商业化发展"></a>商业化发展</h1><p>1947年十二月，Eckert and Mauchly组建了Eckert-Mauchly计算机公司。他们为Northrop生产了第一台计算机BINAC，该计算机在1949年八月正式亮相。在经历了一些财务危机后，公司被Remington-Rand收购。在那里，他们建造了被设计用来作为通用目的的计算机UNIVAC I（Universal Automatic<br>Computer 通用自动计算机）（见插图 1.12.2）。UNIVAC I于1951年6月首次交付，售价约100万美元，也是第一台成功建造的48位系统的商用计算机！这台早期的机器，以及许多其他有趣的计算机知识，都可以在加利福尼亚州山景城的计算机历史博物馆看到。</p>
+<div style="text-align:center"><img style="width:400px;height:300px" src=".\UNIVAC-min.jpg"><p>图1.12.2 UNIVAC I,美国第一台商业计算机。<br>它准确预测了1952年总统大选的结果，但是这个预测结果并没有通过广播发布出来，因为质疑这个早期预测的真实性</p></div>
+
+<p>IBM公司在打孔卡以及办公自动化上具有广泛的业务，却直到1950年才开始涉足计算机。第一台IBM计算机，IBM 701，在1952年正式交付，最终卖了19台。在二十世纪五十年代初，许多人对计算机的发展持悲观态度，认为这些“高度专业化”机器的市场和机会是相当有限的。</p>
+<p>1964年，IBM采取了一个大胆的举动，投资50亿美元研发公布了System/360。 IBM发言人当时表示：</p>
+<blockquote>
+<p>“我们很自豪的宣布,这是我们公司历史上最重要的产品发布会。这不是任何以前意义上的计算机，这不是单一的产品，而是一个产品线..。计算机的性能从低谷冲上了高峰”</p>
+</blockquote>
+<div style="text-align:center"><img style="width:400px;height:300px" src=".\System360-min.jpg"><p>图1.12.3 IBM System/360计算机：型号40,50,65和75在1964年介绍中一并亮相。这四种型号在成本和性能上差异接近10倍;如果包括模型20和30的话（未显示），它会增长到25倍。时钟频率，内存大小的范围，以及只有平均大小的处理器和内存的近似价格：（a）40型,1.6MHz，32KB-256KB，225,000美元;（b）50型，2.0 MHz，128 KB-256 KB，550,000美元;（c）65型，5.0 MHz，256 KB-1 MB，$ 1,200,000;（d）75 MHz，5.1 MHz，256 KB-1 MB，1,900,000美元。添加I/O设备通常会将价格提高1.8至3.5倍，在便宜型号的价格上更高。</p></div>
+
+<p>IBM将体系结构抽象概念转化为商业现实，宣布了System/360体系结构的六个实现，其价格和性能各相差25倍。图1.12.3显示了其中四个型号。 IBM打赌它将在计算机系列（computer family）获得成功，IBM赌赢了。 System/360及其后续继承者主宰了大型电脑市场。</p>
+<p>大约一年后，数字设备公司（DEC）推出了第一台商用小型机PDP-8。这台小型机器在低成本设计方面获得了突破性进展，使得DEC可以提供价格低于20,000美元的电脑。小型机是微处理器的先驱，随后在1971年，英特尔发明了第一台微处理器，取名为——英特尔4004。</p>
+<p>1963年，世界第一台超级计算机也被发布了。这场发布宣告既不是来自大型公司也不是来自高科技中心，而是来自明尼苏达州的控制资料公司（Control Data Corporation）一个叫Seymour Cray的人，他领导设计了CDC 6600。Cray不久离开了控制资料公司而在威斯康辛组建了克雷研究公司（ Cray Research, Inc）。在1976年，他宣布了Cray-1号的诞生（图1.12.4）。这台机器同时是世界上最快，最昂贵，以及性价比最高的用于科学研究的计算机。</p>
+<div style="text-align:center"><img style="width:400px;height:300px" src=".\Cray-1-min.jpg"><p>图1.12.4 Cray-1，第一台商业矢量超级计算机，发布于1976年。这台超级计算机具有不同寻常的特性，表现在它既是一台最快的科学应用计算机，也是一台使用这些科学应用的性价比最高的计算机。从顶部看，这台计算机看起来像字母C。Seymour Cray由于车祸在1996年去世了。在他去世前这段时间，这位已经70岁的计算机先驱者正在着手研究他对下一代超级计算机的看法（详情请见<a href="http://www.Cray.com" target="_blank" rel="external">www.Cray.com</a>）</p></div>
+
+<p>当Seymour Cray在建造世界上最昂贵的计算机时，全球各地的其他一些设计师却在研究使用微处理器来建造一台平常百姓都能负担的起的家用计算机。个人计算机在以前并没有先例，但在1977年，史蒂夫·乔布斯和史蒂夫·沃兹尼亚克的苹果IIe（图1.12.5）为个人计算机只行业定义了低成本，高容量和高可靠性的标准。</p>
+<div style="text-align:center"><img style="width:400px;height:300px" src=".\AppleIIePlus-min.jpg"><p>图1.12.5 The Apple IIe Plus。Apple IIe由Steve Wozniak设计，为行业设定了成本和可靠性的标准。</p></div>
+
+<p>尽管领先其他厂商发布四年，苹果公司的个人计算机最终也只能位列第二。IBM公司于1981年发布的个人计算机，成功的成为了最为畅销的计算机种类；它的成功让Intel和Microsoft的产品分别成为了最受欢迎的微处理器和操作系统。直到今天，最为畅销的CD还是微软操作系统安装碟，尽管它比一张音乐CD还贵几倍！如今，IBM兼容机已经存在了30多年，已经有了很大的发展。而实际上，第一台个人计算机只拥有16位处理器和64KB内存，并且低密度，慢速的软盘是唯一的非易失性存储器！软盘最初由IBM开发，用于在大型机中加载诊断程序，直到CD和网络出现以前，软盘作为数据交换的一种方法，成为个人计算机中的主要I/O设备持续了将近20年的时间。</p>
+<p>当然，英特尔微处理器也是从第一台使用16位处理器核心和8位外部接口的处理器开始发展起来的！在第2章中，我们将介绍英特尔架构的发展。</p>
+<p>第一台个人计算机特别简单，和今天相比，只有一点或者干脆没有图形功能，没有定位装置，也没有原始的操作系统。施乐奥托（Xerox Alto）公司的计算机则启发了许多计算机结构和软件的概念从而塑造产生了现代桌面计算机，如图1.12.6所示。Alto计算机被作为未来计算机的实验原型而建造；一共有数百台Alto计算机被生产出来，其中大部分都捐献给了大学。Alto中采用的技术概括如下：</p>
+<ul>
+<li>与计算机集成的位图图形显示器（早期的图形显示器充当终端，通常连接到大型计算机）</li>
+<li>鼠标，之前就被发明出来了，但在每一个Alto计算机中广泛用于用户界面</li>
+<li>局域网（LAN），成为了以太网的先驱</li>
+<li>一个基于视窗的用户界面，具有WYSIWYG（你所看到的就是你所得到的）的编辑器和交互式绘图程序</li>
+</ul>
+<p>除此之外，文件服务器和打印服务器都是通过局域网络进行开发和交互的，局域网和广域“阿帕网”（ARPAnet）之间的连接产生了互联网式网络的第一个版本。施乐奥拓（Xerox Alto）的影响力非常大，显然影响了各种计算机和软件系统的设计，包括苹果Macintosh，IBM兼容PC，MacOS和Windows以及Sun，还有其他早期的工作站。</p>
+<hr>
+<blockquote>
+<p>翻译节选自<a href="https://booksite.elsevier.com/9780124077263/downloads/historial%20perspectives/section_1.12.pdf" target="_blank" rel="external">Computer Organization and Design, Fifth Edition 1.12网络章节</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/译文/" rel="tag"># -译文</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/26/test-md/" rel="next" title="123">
+                <i class="fa fa-chevron-left"></i> 123
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">dskin</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/dskin" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:huasqjc@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一台电子计算机"><span class="nav-number">1.</span> <span class="nav-text">第一台电子计算机</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#商业化发展"><span class="nav-number">2.</span> <span class="nav-text">商业化发展</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">dskin</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
