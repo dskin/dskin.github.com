@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="计算机组成原理," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="处理器的设计步骤通常来说，设计一个处理器，需要经过以下五个步骤：  分析指令系统，得出对数据通路的需求 为数据通路选择合适的组件 连接组件建立数据通路 分析每条指令的实现，以确定控制信号 集成控制信号，形成完整的控制逻辑">
+<meta name="keywords" content="计算机组成原理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="单周期处理器">
+<meta property="og:url" content="https://dskin.github.io/2017/11/27/单周期处理器-md/index.html">
+<meta property="og:site_name" content="dskin">
+<meta property="og:description" content="处理器的设计步骤通常来说，设计一个处理器，需要经过以下五个步骤：  分析指令系统，得出对数据通路的需求 为数据通路选择合适的组件 连接组件建立数据通路 分析每条指令的实现，以确定控制信号 集成控制信号，形成完整的控制逻辑">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://dskin.github.io/2017/11/27/单周期处理器-md/register.png">
+<meta property="og:image" content="https://dskin.github.io/2017/11/27/单周期处理器-md/memory.png">
+<meta property="og:image" content="https://dskin.github.io/2017/11/27/单周期处理器-md/IFU.png">
+<meta property="og:image" content="https://dskin.github.io/2017/11/27/单周期处理器-md/add.png">
+<meta property="og:image" content="https://dskin.github.io/2017/11/27/单周期处理器-md/logic.png">
+<meta property="og:image" content="https://dskin.github.io/2017/11/27/单周期处理器-md/load.png">
+<meta property="og:image" content="https://dskin.github.io/2017/11/27/单周期处理器-md/store.png">
+<meta property="og:image" content="https://dskin.github.io/2017/11/27/单周期处理器-md/instruction.png">
+<meta property="og:image" content="https://dskin.github.io/2017/11/27/单周期处理器-md/addInstruction.png">
+<meta property="og:image" content="https://dskin.github.io/2017/11/27/单周期处理器-md/oriInstruction.png">
+<meta property="og:image" content="https://dskin.github.io/2017/11/27/单周期处理器-md/loadInstruction.png">
+<meta property="og:image" content="https://dskin.github.io/2017/11/27/单周期处理器-md/storeInstruction.png">
+<meta property="og:image" content="https://dskin.github.io/2017/11/27/单周期处理器-md/branchInstruction.png">
+<meta property="og:image" content="https://dskin.github.io/2017/11/27/单周期处理器-md/IFUInstruction.png">
+<meta property="og:image" content="https://dskin.github.io/2017/11/27/单周期处理器-md/IFUInstruction.png">
+<meta property="og:image" content="https://dskin.github.io/2017/11/27/单周期处理器-md/controllerTable.png">
+<meta property="og:image" content="https://dskin.github.io/2017/11/27/单周期处理器-md/RegDst.png">
+<meta property="og:image" content="https://dskin.github.io/2017/11/27/单周期处理器-md/allControllerSigns.png">
+<meta property="og:image" content="https://dskin.github.io/2017/11/27/单周期处理器-md/controllerFin.png">
+<meta property="og:updated_time" content="2017-11-28T09:51:18.265Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="单周期处理器">
+<meta name="twitter:description" content="处理器的设计步骤通常来说，设计一个处理器，需要经过以下五个步骤：  分析指令系统，得出对数据通路的需求 为数据通路选择合适的组件 连接组件建立数据通路 分析每条指令的实现，以确定控制信号 集成控制信号，形成完整的控制逻辑">
+<meta name="twitter:image" content="https://dskin.github.io/2017/11/27/单周期处理器-md/register.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dskin.github.io/2017/11/27/单周期处理器-md/"/>
+
+
+
+
+
+  <title>单周期处理器 | dskin</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?b9584e1df80c955aa972713d735bb3c0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dskin</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">简单的个人博客</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dskin.github.io/2017/11/27/单周期处理器-md/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="dskin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dskin">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">单周期处理器</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-27T16:29:52+08:00">
+                2017-11-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="处理器的设计步骤"><a href="#处理器的设计步骤" class="headerlink" title="处理器的设计步骤"></a>处理器的设计步骤</h1><p>通常来说，设计一个处理器，需要经过以下五个步骤：</p>
+<ul>
+<li>分析指令系统，得出对数据通路的需求</li>
+<li>为数据通路选择合适的组件</li>
+<li>连接组件建立数据通路</li>
+<li>分析每条指令的实现，以确定控制信号</li>
+<li>集成控制信号，形成完整的控制逻辑</li>
+</ul>
+<a id="more"></a>
+<p>我们知道，现代计算机内部的电路都为数字电路，因而处理器的组成则就是这些数字电路经过精妙的组合设计完成的。处理器由控制器和运算器两部分组成。</p>
+<h2 id="第一步，分析指令系统，得出对数据通路的需求"><a href="#第一步，分析指令系统，得出对数据通路的需求" class="headerlink" title="第一步，分析指令系统，得出对数据通路的需求"></a>第一步，分析指令系统，得出对数据通路的需求</h2><p>以MIPS指令系统简化版本为例，我们想要实现的指令类型有：</p>
+<ul>
+<li>无符号加法和减法</li>
+<li>立即数的逻辑或</li>
+<li>装载和存储一个字</li>
+<li>条件分支</li>
+</ul>
+<p>因此通过分析，我们的需求有如下几点：</p>
+<ul>
+<li>存放指令的存储器，可读，地址和数据均为32位</li>
+<li>存放指令地址的32位寄存器</li>
+<li>同时读取两个寄存器的内容(rs和rt)</li>
+<li>一组存放数据的32位通用寄存器</li>
+<li>改写一个寄存器的内容(rd或rt)</li>
+<li>将16位立即数扩展到32位(零扩展)</li>
+<li>提供加减逻辑或三种功能的计算器</li>
+<li>运算的操作数可以是寄存器或者扩展后的立即数</li>
+<li>存放数据的存储器，可读写，地址和数据均为32位</li>
+<li>将16位立即数扩展到32位(符号扩展)</li>
+<li>比较两个数，判断是否相等</li>
+<li>PC寄存器支持两种自增方式，加4或加一个立即数</li>
+</ul>
+<hr>
+<h2 id="第二步，为数据通路选择合适的组件"><a href="#第二步，为数据通路选择合适的组件" class="headerlink" title="第二步，为数据通路选择合适的组件"></a>第二步，为数据通路选择合适的组件</h2><p>我们通过以上的分析，不难得出，需要满足上述的需求，则需要以下一些组件：</p>
+<ul>
+<li>算数逻辑单元(ALU)<ul>
+<li>支持运算类型：加，减，或，比较相等</li>
+<li>操作数：2个32位的数，来自寄存器或扩展后的立即数</li>
+</ul>
+</li>
+<li>立即数扩展部件<ul>
+<li>将一个16位立即数扩展为32位数</li>
+<li>扩展方式：零扩展，符号扩展</li>
+</ul>
+</li>
+<li>程序计数器(PC)<ul>
+<li>一个32位的寄存器</li>
+<li>支持两种加法：加4或者加一个立即数</li>
+</ul>
+</li>
+<li>寄存器堆<ul>
+<li>每个寄存器为32位宽，共32个</li>
+<li>支持读操作：rs和rt</li>
+<li>支持写操作：rt或rd</li>
+</ul>
+</li>
+<li>存储器<ul>
+<li>一个只读的指令存储器，地址和数据均为32位</li>
+<li>一个可读写的数据存储器，地址和数据均为32位<blockquote>
+<p>这里两个存储器实际对应了CPU中的指令和数据高速缓存，而不是内存</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<p>我们来详细看一下寄存器堆</p>
+<p><img src="register.png" alt="register" width="600" height="400" align="center"></p>
+<p>再来详细看下存储器</p>
+<p><img src="memory.png" alt="memory" width="600" height="400" align="center"></p>
+<hr>
+<h2 id="第三步，连接组件建立数据通路"><a href="#第三步，连接组件建立数据通路" class="headerlink" title="第三步，连接组件建立数据通路"></a>第三步，连接组件建立数据通路</h2><p>建立数据通路的基本原则就是<strong>根据指令需求，连接组件，建立数据通路</strong>，而指令的需求，则分为两种，第一种是所有指令的共同需求，第二种是不同指令的各自不同的需求。</p>
+<h3 id="所有指令的共同需求"><a href="#所有指令的共同需求" class="headerlink" title="所有指令的共同需求"></a>所有指令的共同需求</h3><p>首先我们都需要<strong>取指令</strong>，而程序计数器的（PC）的内容就是指令的地址，用PC的内容作为地址，我们就可以访问指令存储器获得指令编码。</p>
+<p>其次，我们需要为下一条取指做好准备，这时我们就需要<strong>更新程序计数器</strong>。这里又分两种情况，当程序顺序执行时，我们只需要将PC加四（下条指令的长度，MIPS为四字节）就可以获得下个指令的地址；当程序发生分支时，就需要将分支目标的地址更新到PC。</p>
+<p>这样，我们将这些共同需求组合在一起，就完成了一个<strong>取指部件（IFU）</strong>，以下是示意图</p>
+<p><img src="IFU.png" alt="memory" width="600" height="400" align="center"></p>
+<h3 id="不同指令的不同需求"><a href="#不同指令的不同需求" class="headerlink" title="不同指令的不同需求"></a>不同指令的不同需求</h3><h4 id="加法和减法指令的需求"><a href="#加法和减法指令的需求" class="headerlink" title="加法和减法指令的需求"></a>加法和减法指令的需求</h4><p>加减法的格式大致如此<code>R[rd] = R[rs] op R[rt]</code>，为R型指令，如下图所示，ALUCtr和RegWr为控制信号</p>
+<p><img src="add.png" alt="add" width="600" height="400" align="center"></p>
+<h4 id="逻辑运算指令的需求"><a href="#逻辑运算指令的需求" class="headerlink" title="逻辑运算指令的需求"></a>逻辑运算指令的需求</h4><p><code>R[rt] = R[rs] op ZeroExt[imm16]</code>，为I型指令。上图的部件对逻辑运算指令来说，又出现了三个问题：</p>
+<ul>
+<li>逻辑运算的目的寄存器是rt而不是rd</li>
+<li>立即数是ALU的输入，目前的部件只能从寄存器输入</li>
+<li>立即数只有16位</li>
+</ul>
+<p>为了解决这些问题，我们进行了：</p>
+<ul>
+<li>在目的寄存器上增加了一个二选一的多选器，由RegDst进行控制</li>
+<li>在ALU的一个输入上也增加了一个二选一的多选器，由ALUSrc控制</li>
+<li>增加一个零扩展部件，接入多选器的输入端</li>
+</ul>
+<p><img src="logic.png" alt="logic" width="600" height="400" align="center"></p>
+<h4 id="访存指令的需求（Load）"><a href="#访存指令的需求（Load）" class="headerlink" title="访存指令的需求（Load）"></a>访存指令的需求（Load）</h4><p><code>R[rt] = Mem[R[rs] + SignExt[imm16]]</code>,为I型指令。上图的部件对访存指令（Load）来说，又出现了两个问题：</p>
+<ul>
+<li>如何进行符号扩展？目前还只能进行零扩展</li>
+<li>和何处装载数据？</li>
+</ul>
+<p>解决的方法也很简单，只需要将原有的零扩展部件增加符号扩展功能；并且加入数据存储器以及相应的多选器。分别由ExtOp和MemtoReg进行控制。如图所示。<br><img src="load.png" alt="load" width="600" height="400" align="center"></p>
+<h4 id="访存指令的需求（Store）"><a href="#访存指令的需求（Store）" class="headerlink" title="访存指令的需求（Store）"></a>访存指令的需求（Store）</h4><p><code>Mem[R[rs] + SignExt[imm16]] = R[rt]</code>，为I型指令。Store指令和Load指令很相似，所以在上述部件，我们又做了如下修改，增加了一条由busB到数据存储器的线路，同时在数据存储器上新增了控制信号MemWr。<br><img src="store.png" alt="store" width="600" height="400" align="center"></p>
+<p>到现在为止，我们就已经完成了数据通路的基本建立。</p>
+<hr>
+<h2 id="第四步，分析每条指令的实现，以确定控制信号"><a href="#第四步，分析每条指令的实现，以确定控制信号" class="headerlink" title="第四步，分析每条指令的实现，以确定控制信号"></a>第四步，分析每条指令的实现，以确定控制信号</h2><p><img src="instruction.png" alt="instruction" width="600" height="400" align="center"></p>
+<h3 id="1、运算指令的控制信号"><a href="#1、运算指令的控制信号" class="headerlink" title="1、运算指令的控制信号"></a>1、运算指令的控制信号</h3><h4 id="加法指令的操作步骤"><a href="#加法指令的操作步骤" class="headerlink" title="加法指令的操作步骤"></a>加法指令的操作步骤</h4><p>1. 从指令存储器中取回指令，所有指令都有这个步骤<br>2. <img src="addInstruction.png" alt="addInstruction" width="600" height="400" align="center"><br>3. 更新程序计数器的内容，除了分支指令，都有此步骤</p>
+<h4 id="ori指令的操作步骤"><a href="#ori指令的操作步骤" class="headerlink" title="ori指令的操作步骤"></a>ori指令的操作步骤</h4><p>一三步和加法指令一致，这里只看第二步。<br><img src="oriInstruction.png" alt="oriInstruction" width="600" height="400" align="center"></p>
+<h3 id="2、访存指令的控制信号"><a href="#2、访存指令的控制信号" class="headerlink" title="2、访存指令的控制信号"></a>2、访存指令的控制信号</h3><p>一三步和上述指令一致，这里只看第二步。</p>
+<h4 id="lw指令的操作步骤"><a href="#lw指令的操作步骤" class="headerlink" title="lw指令的操作步骤"></a>lw指令的操作步骤</h4><p><img src="loadInstruction.png" alt="loadInstruction" width="600" height="400" align="center"></p>
+<h4 id="sw指令的操作步骤"><a href="#sw指令的操作步骤" class="headerlink" title="sw指令的操作步骤"></a>sw指令的操作步骤</h4><p><img src="storeInstruction.png" alt="storeInstruction" width="600" height="400" align="center"></p>
+<h3 id="3、分支指令的控制信号"><a href="#3、分支指令的控制信号" class="headerlink" title="3、分支指令的控制信号"></a>3、分支指令的控制信号</h3><p>1. 从指令存储器中取回指令<br>2. <code>if[R[rs] - R[rt] == 0]</code>判断转移条件是否成立<br> 分支指令有些特殊，因此，我们还需修改相应的部件，在ALU的计算中判断结果是否等于0，将结果送回IFU。<br> <img src="branchInstruction.png" alt="branchInstruction" width="600" height="400" align="center"><br>3. <code>then PC = PC + 4 + SignExt[imm16]*4 else PC = PC + 4</code>计算下一条指令的地址<br> 第三步的处理方式和其他指令是不同的，也新增了很多部件，详细如下图所示<br> <img src="IFUInstruction.png" alt="IFUInstruction" width="600" height="400" align="center"></p>
+<hr>
+<h2 id="第五步，集成控制信号，形成完整的控制逻辑"><a href="#第五步，集成控制信号，形成完整的控制逻辑" class="headerlink" title="第五步，集成控制信号，形成完整的控制逻辑"></a>第五步，集成控制信号，形成完整的控制逻辑</h2><p>到现在，我们已经确定了每条指令实现时控制信号的值，但是这八个控制信号（nPC_sel,RegWr,RegDst,ExtOp,ALUSrc,ALUctr,MemWr,MemtoReg），到底是如何实现的呢？</p>
+<p>其实就是指令格式中我们还未使用的两部分，<code>opcode</code>和<code>func</code>域，用它们来产生各种控制信号，实现这部分的电路就叫做控制逻辑，也就是<strong>控制器</strong>。</p>
+<p><img src="IFUInstruction.png" alt="IFUInstruction" width="600" height="400" align="center"></p>
+<p>我们将执行各个指令时各个控制信号的值列成一个表格，并且将各指令的func和opc域放在上面，如下所示：<br><img src="controllerTable.png" alt="controllerTable" width="600" height="400" align="center"></p>
+<p>我们以每行看的话，就可以得到一个控制信号的逻辑表达式，以RegDst为例：<br><img src="RegDst.png" alt="RegDst" width="600" height="400" align="center"></p>
+<p>要想RegDst信号为1，那么就要将add与sub进行或操作，即<code>RegDst = add + sub</code>，可add与sub自身又如何生成呢？表示如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">add = rtype.func5.~func4.~func3.~func2.~func1.~func0</div><div class="line">sub = rtype.func5.~func4.~func3.~func2.func1.~func0</div><div class="line"></div><div class="line">rtype = ~op5.~op4.~op3.~op2.~op1.~op0</div></pre></td></tr></table></figure></p>
+<p>这样，我们就得到了RegDst的逻辑表达式，这样就可以通过画出与门和非门产生RegDst信号的电路图。同理可得其他控制信号的逻辑表达式。<br><img src="allControllerSigns.png" alt="allControllerSigns" width="600" height="400" align="center"></p>
+<p>观察上图可以发现，下半部分都是进行与操作，上半部分则是进行或操作，因此我们将两部分电路分别连接起来，当输入opcode和func域后，就能自动输出控制信号了，这也就是控制器的实现。<br><img src="controllerFin.png" alt="controllerFin" width="600" height="400" align="center"></p>
+<p>这就是简化的单周期处理器的整个设计过程，虽然简单，但却也包含了整个主要知识点。</p>
+<blockquote>
+<p>本文总结自<a href="&quot;https://www.coursera.org/learn/jisuanji-zucheng/home/week/6&quot;">coursera 陆俊林教授的《计算机组成》第五讲</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/计算机组成原理/" rel="tag"># 计算机组成原理</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/26/section_1.12_ch/" rel="next" title="译文——第一台电子计算机和其商业化发展(1.12)">
+                <i class="fa fa-chevron-left"></i> 译文——第一台电子计算机和其商业化发展(1.12)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">dskin</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/dskin" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:huasqjc@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#处理器的设计步骤"><span class="nav-number">1.</span> <span class="nav-text">处理器的设计步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一步，分析指令系统，得出对数据通路的需求"><span class="nav-number">1.1.</span> <span class="nav-text">第一步，分析指令系统，得出对数据通路的需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二步，为数据通路选择合适的组件"><span class="nav-number">1.2.</span> <span class="nav-text">第二步，为数据通路选择合适的组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三步，连接组件建立数据通路"><span class="nav-number">1.3.</span> <span class="nav-text">第三步，连接组件建立数据通路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#所有指令的共同需求"><span class="nav-number">1.3.1.</span> <span class="nav-text">所有指令的共同需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不同指令的不同需求"><span class="nav-number">1.3.2.</span> <span class="nav-text">不同指令的不同需求</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#加法和减法指令的需求"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">加法和减法指令的需求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#逻辑运算指令的需求"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">逻辑运算指令的需求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#访存指令的需求（Load）"><span class="nav-number">1.3.2.3.</span> <span class="nav-text">访存指令的需求（Load）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#访存指令的需求（Store）"><span class="nav-number">1.3.2.4.</span> <span class="nav-text">访存指令的需求（Store）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四步，分析每条指令的实现，以确定控制信号"><span class="nav-number">1.4.</span> <span class="nav-text">第四步，分析每条指令的实现，以确定控制信号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、运算指令的控制信号"><span class="nav-number">1.4.1.</span> <span class="nav-text">1、运算指令的控制信号</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#加法指令的操作步骤"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">加法指令的操作步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ori指令的操作步骤"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">ori指令的操作步骤</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、访存指令的控制信号"><span class="nav-number">1.4.2.</span> <span class="nav-text">2、访存指令的控制信号</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#lw指令的操作步骤"><span class="nav-number">1.4.2.1.</span> <span class="nav-text">lw指令的操作步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sw指令的操作步骤"><span class="nav-number">1.4.2.2.</span> <span class="nav-text">sw指令的操作步骤</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、分支指令的控制信号"><span class="nav-number">1.4.3.</span> <span class="nav-text">3、分支指令的控制信号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第五步，集成控制信号，形成完整的控制逻辑"><span class="nav-number">1.5.</span> <span class="nav-text">第五步，集成控制信号，形成完整的控制逻辑</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">dskin</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
