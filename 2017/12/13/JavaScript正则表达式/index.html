@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="dskin">
 <meta property="og:description" content="JavaScript正则表达式一、RegExp对象两种方法实例化RegExp对象：  字面量 如var reg = /\bis\b/g 构造函数 如var reg = new RegExp(&amp;#39;\\bis\\b,&amp;#39;g&amp;#39;)">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-13T10:18:53.300Z">
+<meta property="og:updated_time" content="2017-12-13T10:23:20.481Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript正则表达式">
 <meta name="twitter:description" content="JavaScript正则表达式一、RegExp对象两种方法实例化RegExp对象：  字面量 如var reg = /\bis\b/g 构造函数 如var reg = new RegExp(&amp;#39;\\bis\\b,&amp;#39;g&amp;#39;)">
@@ -494,7 +494,7 @@
 <p><strong>或</strong><code>|</code>，表示可选的一种情况。如<code>a|b</code>,表示匹配a或b。</p>
 <p><strong>反向引用</strong>，捕获分组的内容进行替换，<code>$1,$2,$3...$n</code>。</p>
 <p><strong>忽略分组</strong>，不希望捕获某些分组，<code>?:</code>。</p>
-<h2 id="九、前瞻"><a href="#九、前瞻" class="headerlink" title="九、前瞻"></a>九、前瞻</h2><p>正则表达式从文本头部向尾部开始解析，文本尾部方向，成为<em>前</em>。</p>
+<h2 id="九、前瞻"><a href="#九、前瞻" class="headerlink" title="九、前瞻"></a>九、前瞻</h2><p>正则表达式从文本头部向尾部开始解析，文本尾部方向，称为<em>前</em>。</p>
 <p><strong>前瞻</strong>就是在正则表达式匹配到规则的时候，向前检查是否符合<strong>断言</strong>。(后顾/后瞻则相反，JavaScript不支持后顾)</p>
 <p>符合和不符合特定断言称为<strong>肯定/正向匹配</strong>和<strong>否定/负向匹配</strong>。</p>
 <ul>
@@ -517,28 +517,26 @@
 </li>
 </ul>
 <p>exec方法非全局调用时，返回的数组第一个是与正则相匹配的文本，第二个是与RegExpObject的第一个子表达式相匹配的文本（也就是第一个分组）（如果有的话），第三个是与RegExpObject的第二个子表达式相匹配的文本。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> reg = <span class="regexp">/\d(\w)\d/</span>;</div><div class="line"><span class="keyword">var</span> ts = <span class="string">'1a2b3c4d5e'</span>;</div><div class="line"><span class="keyword">var</span> ret = reg3.exec(ts);</div><div class="line"><span class="built_in">console</span>.log(ret);</div><div class="line"><span class="comment">// 以下是打印的返回数组</span></div><div class="line">[<span class="string">"1a2"</span>, <span class="string">"a"</span>, <span class="attr">index</span>: <span class="number">0</span>, <span class="attr">input</span>: <span class="string">"1a2b3c4d5e"</span>]</div><div class="line"><span class="number">0</span>:<span class="string">"1a2"</span></div><div class="line"><span class="number">1</span>:<span class="string">"a"</span></div><div class="line">index:<span class="number">0</span></div><div class="line">input:<span class="string">"1a2b3c4d5e"</span></div><div class="line">length:<span class="number">2</span></div></pre></td></tr></table></figure></p>
-<h2 id="十二、字符串对象方法"><a href="#十二、字符串对象方法" class="headerlink" title="十二、字符串对象方法"></a>十二、字符串对象方法</h2><ul>
-<li><p>1、search() 用于检索字符串中指定的子字符串，或检索与正则表达式相匹配的子字符串</p>
-<p>  方法返回第一个匹配结果的index，查找不到返回-1，它不执行全局匹配忽略标志g，总是从字符串的开始进行检索。</p>
-</li>
-<li><p>2、match() 用于找到一个或多个与正则相匹配的文本</p>
-<p>  它是否具有标志g很大程度上影响结果。</p>
-<p>  <strong>非全局调用</strong>。</p>
+<h2 id="十二、字符串对象方法"><a href="#十二、字符串对象方法" class="headerlink" title="十二、字符串对象方法"></a>十二、字符串对象方法</h2><p>1、search() 用于检索字符串中指定的子字符串，或检索与正则表达式相匹配的子字符串</p>
+<p>方法返回第一个匹配结果的index，查找不到返回-1，它不执行全局匹配忽略标志g，总是从字符串的开始进行检索。</p>
+<p>2、match() 用于找到一个或多个与正则相匹配的文本</p>
+<p>它是否具有标志g很大程度上影响结果。</p>
+<p><strong>非全局调用</strong>。</p>
 <ul>
 <li>执行一次匹配</li>
 <li>未找到，返回null，否则返回一个数组，存放了它所找到的匹配文本有关的信息</li>
 <li>返回的数组第一个是匹配的文本，其余的元素存放的是与正则表达式子表达式匹配的文本</li>
-<li><p>此外，返回的数组还具有两个属性，index与input。方法整体与exec类似</p>
+<li>此外，返回的数组还具有两个属性，index与input。方法整体与exec类似</li>
+</ul>
 <p><strong>全局调用</strong></p>
-</li>
+<ul>
 <li>执行全局匹配</li>
 <li>未找到，返回null，若找到了一个或多个匹配子串，则返回一个数组</li>
 <li>数组中存放的是字符串中所有的匹配子串，而且没有index和input属性</li>
 </ul>
-</li>
-<li><p>3、split() 用于把字符串分割成字符串数组</p>
-</li>
-<li><p>4、replace() 用于替换字符串中指定的字符串<br>  三种参数使用情况</p>
+<p>3、split() 用于把字符串分割成字符串数组</p>
+<p>4、replace() 用于替换字符串中指定的字符串</p>
+<p>三种参数使用情况</p>
 <ul>
 <li>replace(str,replaceStr)</li>
 <li>replace(reg,replaceStr)</li>
@@ -548,8 +546,6 @@
 <li>正则表达式分组内容，没有分组则没有该参数</li>
 <li>匹配项在字符串中的index</li>
 <li>原字符串</li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
